@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CalcArea
 {
@@ -11,20 +12,34 @@ namespace CalcArea
                 Console.WriteLine("Выберите фигуру: 1- прямоугольник, 2 - круг");
                 var selectedIndex = int.Parse(Console.ReadLine());
 
-                if (selectedIndex == 1)
+                IFigure figure;
+                switch (selectedIndex)
                 {
-                    Console.WriteLine("Введите A и B");
-                    var a = float.Parse(Console.ReadLine());
-                    var b = float.Parse(Console.ReadLine());
-                    Console.WriteLine($"Площадь прямоугольника: {a * b}");
-                }
+                    case 1:
+                        figure = new Rectangle();
+                        break;
+                    case 2:
+                        figure = new Circle();
+                        break;
 
-                if (selectedIndex == 2)
-                {
-                    Console.WriteLine("Введите R");
-                    var r = float.Parse(Console.ReadLine());
-                    Console.WriteLine($"Площадь круга: {Math.PI * Math.Pow(r, 2)}");
+                    default:
+                        Console.WriteLine("Такой фигуры нет");
+                        return;
                 }
+                
+                //Вот отсюда мы работаем только с выбранной фигурой LINQ
+                Console.WriteLine(figure.EnterParamsTitle);
+                var argsStrings = Console.ReadLine().Split(',');
+
+                float[] floatArray = new float[argsStrings.Length];
+                for (var i = 0; i < argsStrings.Length; i++)
+                {
+                    floatArray[i] = float.Parse(argsStrings[i]);
+                }
+                figure.Init(floatArray);
+                //figure.Init(argsStrings.Select(x => float.Parse(x)).ToArray());
+
+                Console.WriteLine($"{figure.OutputTitle} {figure.CalcArea()}");
             }
             catch (Exception e)
             {
