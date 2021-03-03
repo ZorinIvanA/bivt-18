@@ -30,7 +30,7 @@ namespace CalcArea
                         return;
                 }
                 
-                //Вот отсюда мы работаем только с выбранной фигурой LINQ
+                //Вот отсюда мы работаем только с выбранной фигурой
                 Console.WriteLine(figure.EnterParamsTitle);
                 var argsStrings = Console.ReadLine().Split(',');
 
