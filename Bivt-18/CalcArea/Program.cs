@@ -9,7 +9,7 @@ namespace CalcArea
         {
             try
             {
-                Console.WriteLine("Выберите фигуру: 1- прямоугольник, 2 - круг");
+                Console.WriteLine("Выберите фигуру: 1- прямоугольник, 2 - круг, 3 - треугольник");
                 var selectedIndex = int.Parse(Console.ReadLine());
 
                 IFigure figure;
@@ -20,6 +20,9 @@ namespace CalcArea
                         break;
                     case 2:
                         figure = new Circle();
+                        break;
+                    case 3:
+                        figure = new Triangle();
                         break;
 
                     default:
